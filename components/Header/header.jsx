@@ -1,27 +1,31 @@
-import Link from "next/link";
-import Navbar from "./nav";
 import SearchModal from "./search";
 import ProfileMenu from "./profile";
 import ThemeToggle from "../Theme/Toggle";
+import Logo from "./logo";
+import { MobileNav, Navbar } from "./nav";
 
-const Header = () => {
-  return (
-    <header className="flex items-center justify-between py-2">
-      <div className="flex items-center gap-3">
-        <h1 className="text-xl font-bold">
-          <Link href="/" className="flex items-center">
-            Blog Posted
-          </Link>
-        </h1>
+const Header = () => (
+  <header className="border-b border-gray-200/50 dark:border-gray-800">
+    <nav className="container flex items-center justify-between py-2 gap-3">
+      {/* Desktop Navigation */}
+      <div className="hidden md:flex items-center gap-3">
+        <Logo />
         <Navbar />
       </div>
-      <div className="flex items-center gap-3">
-        <ThemeToggle />
-        <SearchModal />
-        <ProfileMenu />
+
+      {/* Mobile Navigation */}
+      <div className="block md:hidden">
+        <MobileNav />
       </div>
-    </header>
-  );
-};
+
+      {/* Right Section */}
+      <div className="flex items-center w-full md:w-auto gap-3">
+        <SearchModal className="w-full" />
+        <ProfileMenu />
+        <ThemeToggle />
+      </div>
+    </nav>
+  </header>
+);
 
 export default Header;

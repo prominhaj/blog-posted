@@ -1,8 +1,5 @@
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
-
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -13,6 +10,19 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Logo from "./logo";
 
 const components = [
   {
@@ -38,107 +48,146 @@ const components = [
     href: "/docs/primitives/scroll-area",
     description: "Visually or semantically separates content.",
   },
+];
+
+const navItems = [
   {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    title: "Blogs",
+    href: "/blogs",
   },
   {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    title: "Contract",
+    href: "/contract",
+  },
+  {
+    title: "About",
+    href: "/about",
   },
 ];
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
-    <NavigationMenu>
+    <NavigationMenu aria-label="Main Navigation">
       <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-              <li className="row-span-3">
-                <NavigationMenuLink asChild>
-                  <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                    href="/"
-                  >
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
-                    </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
-                    </p>
-                  </a>
-                </NavigationMenuLink>
-              </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
-              </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
-              </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
-              </ListItem>
-            </ul>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
+        {/* Components Dropdown */}
         <NavigationMenuItem>
           <NavigationMenuTrigger>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+            <ul className="grid w-[400px] gap-3 p-3 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
               {components.map((component) => (
                 <ListItem
                   key={component.title}
                   title={component.title}
                   href={component.href}
-                >
-                  {component.description}
-                </ListItem>
+                  description={component.description}
+                />
               ))}
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
-            </NavigationMenuLink>
-          </Link>
-        </NavigationMenuItem>
+
+        {/* Static Navigation Links */}
+        {navItems.map((item) => (
+          <NavigationMenuItem key={item.title}>
+            <Link href={item.href} legacyBehavior passHref>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                {item.title}
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        ))}
       </NavigationMenuList>
     </NavigationMenu>
   );
 };
 
+export const MobileNav = () => {
+  return (
+    <Sheet aria-label="Mobile Navigation">
+      <SheetTrigger>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-6"
+          aria-label="Open Mobile Menu"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
+          />
+        </svg>
+      </SheetTrigger>
+      <SheetContent
+        side="left"
+        className="p-3 w-[300px] font-roboto"
+        aria-describedby="Mobile navigation links and components"
+      >
+        <SheetTitle>
+          <Logo />
+        </SheetTitle>
+        <nav className="my-3 h-[calc(100vh-8rem)] pb-10">
+          <Accordion type="single" collapsible className="w-full">
+            <AccordionItem value="item-1" className="border-none">
+              <AccordionTrigger className="hover:no-underline text-base py-2 font-medium">
+                Components
+              </AccordionTrigger>
+              <AccordionContent className="p-0">
+                <ul className="flex flex-col gap-0.5 pl-1.5 pb-2">
+                  {components.map((component) => (
+                    <li key={component.title}>
+                      <Link
+                        className="text-[15px] font-[450]"
+                        href={component.href}
+                      >
+                        {component.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+          <ul className="flex flex-col space-y-1.5">
+            {navItems.map((item) => (
+              <li key={item.title}>
+                <Link className="font-medium" href={item.href}>
+                  {item.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </SheetContent>
+    </Sheet>
+  );
+};
+
+// Reusable List Item Component
 const ListItem = React.forwardRef(
-  ({ className, title, children, ...props }, ref) => {
+  ({ title, href, description, className }, ref) => {
     return (
       <li>
         <NavigationMenuLink asChild>
-          <a
+          <Link
             ref={ref}
             className={cn(
               "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
               className
             )}
-            {...props}
+            href={href}
           >
-            <div className="text-sm font-medium leading-none">{title}</div>
+            <h3 className="text-sm font-medium leading-none">{title}</h3>
             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-              {children}
+              {description}
             </p>
-          </a>
+          </Link>
         </NavigationMenuLink>
       </li>
     );
   }
 );
 ListItem.displayName = "ListItem";
-
-export default Navbar;
