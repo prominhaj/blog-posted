@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import Logo from "../Header/logo";
 
 export default function Footer() {
   return (
@@ -155,15 +156,7 @@ export default function Footer() {
         <div className="pt-5 lg:pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="flex items-center justify-center flex-wrap gap-2">
-              <div
-                className="h-8 w-8 bg-black dark:bg-white rounded-full flex items-center justify-center"
-                aria-hidden="true"
-              >
-                <span className="text-white dark:text-black text-sm font-bold">
-                  B
-                </span>
-              </div>
-              <span className="font-semibold">MetaBlog</span>
+              <Logo />
               <span className="text-sm text-muted-foreground">
                 © JS Template 2023. All Rights Reserved.
               </span>

@@ -8,7 +8,7 @@ const Header = () => (
   <header className="border-b border-gray-200/50 dark:border-gray-800">
     <nav className="container flex items-center justify-between py-2 gap-3">
       {/* Desktop Navigation */}
-      <div className="hidden md:flex items-center gap-3">
+      <div className="hidden md:flex items-center gap-5">
         <Logo />
         <Navbar />
       </div>
