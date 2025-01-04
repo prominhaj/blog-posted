@@ -1,10 +1,20 @@
 import "./globals.css";
-import { Roboto } from "next/font/google";
+import { Roboto, Roboto_Condensed } from "next/font/google";
 import { ThemeProvider } from "@/Provider/theme-provider";
 
+// Font Family
 const roboto = Roboto({
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
+});
+
+const roboto_condensed = Roboto_Condensed({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-condensed",
 });
 
 export const metadata = {
@@ -41,7 +51,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={roboto.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${roboto.variable} ${roboto_condensed.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <ThemeProvider
           attribute="class"

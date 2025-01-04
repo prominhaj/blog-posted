@@ -5,7 +5,7 @@ export default function Logo() {
   return (
     <div>
       <Link href="/" aria-label="Go to homepage">
-        <h1 className="text-xl font-bold flex items-center font-roboto">
+        <h1 className="text-xl font-bold flex items-center font-heading">
           {/* <Image
             src="/path-to-your-logo.svg"
             alt="BLOG PosteD Logo"
