@@ -26,7 +26,7 @@ export default function NavLink({ item, isMobile }) {
 
   return isMobile ? (
     <Button variant="ghost" {...commonProps}>
-      <Link href={item.href} className="w-full text-start">
+      <Link href={item.href} className="w-full text-base text-start">
         {item.title}
       </Link>
     </Button>

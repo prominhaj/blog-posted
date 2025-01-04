@@ -28,7 +28,7 @@ const navItems = [
 
 export const Navbar = () => {
   return (
-    <nav className="text-muted-foreground hover:[&_a]:text-foreground items-center gap-6 text-sm font-medium flex [&_a]:transition-colors">
+    <nav className="text-muted-foreground hover:[&_a]:text-foreground items-center gap-6 text-base font-medium flex [&_a]:transition-colors">
       {navItems.map((item) => (
         <NavLink key={item.title} item={item} />
       ))}
@@ -46,7 +46,7 @@ export const MobileNav = () => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6"
+          className="size-7"
           aria-label="Open Mobile Menu"
         >
           <path
