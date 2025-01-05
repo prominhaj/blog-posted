@@ -1,6 +1,9 @@
 import "./globals.css";
 import { Roboto, Roboto_Condensed } from "next/font/google";
 import { ThemeProvider } from "@/Provider/theme-provider";
+import { ClerkProvider } from "@clerk/nextjs";
+import { cookies } from "next/headers";
+import { dark } from "@clerk/themes";
 
 // Font Family
 const roboto = Roboto({
@@ -49,23 +52,28 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const theme = (await cookies()).get("theme")?.value;
+  const clerkTheme = theme === "light" ? "" : dark;
+
   return (
-    <html
-      lang="en"
-      className={`${roboto.variable} ${roboto_condensed.variable}`}
-      suppressHydrationWarning
-    >
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider appearance={{ baseTheme: clerkTheme }}>
+      <html
+        lang="en"
+        className={`${roboto.variable} ${roboto_condensed.variable}`}
+        suppressHydrationWarning
+      >
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

@@ -50,13 +50,13 @@ export default function ProfileMenu() {
           <>
             <Link
               className="w-full relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-              href="/login"
+              href="/sign-in"
             >
               Login
             </Link>
             <Link
               className="w-full relative flex items-center gap-2 rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-              href="/register"
+              href="/sign-up"
             >
               Register
             </Link>
