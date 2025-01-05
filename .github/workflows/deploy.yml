@@ -40,5 +40,5 @@ jobs:
           project: "mdminhaj-blog-posted-38"
           entrypoint: "jsr:@deno/nextjs-start"
           root: "."
-          include: .next, public
+          
           
